@@ -1,0 +1,31 @@
+{
+  "name": "pubsub-proxy",
+  "version": "0.1.0",
+  "description": "A really simple proxy for objects that support the pubsub pattern",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/testling/bin/cmd.js"
+  },
+  "dependencies": {},
+  "testling": {
+    "harness": "mocha-bdd",
+    "browsers": [
+      "ie/8..latest",
+      "firefox/24..latest",
+      "chrome/28..latest",
+      "opera/12.0", "opera/15..latest",
+      "iphone/6..latest",
+      "safari/5.1..latest"
+    ],
+    "harness" : "mocha",
+    "files": "test/index.js"
+  },
+  "devDependencies": {
+    "browserify": "v2.35.0",
+    "mocha": "*",
+    "sinon": "*",
+    "testling": "*",
+    "customevent-polyfill": "git://github.com/orangemug/customevent-polyfill.git"
+  }
+}
