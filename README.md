@@ -1,6 +1,8 @@
 # event-proxy
 A really simple proxy for objects that support the pubsub pattern, allowing to to destroy groups of subscription handlers
 
+[![browser support](https://ci.testling.com/orangemug/event-proxy.png)](https://ci.testling.com/orangemug/event-proxy)
+
 ## API
 API is as follows
 
