@@ -10,7 +10,12 @@ describe('pubsubProxy', function() {
     var el, proxy;
     beforeEach(function() {
       el = document.createElement("div");
+      document.body.appendChild(el);
       proxy = pubsubProxy(el, "addEventListener", "removeEventListener", "dispatchEvent");
+    });
+
+    afterEach(function() {
+      document.body.removeChild(el);
     });
 
     it('#object is same as original', function() {
