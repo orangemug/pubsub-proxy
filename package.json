@@ -1,7 +1,7 @@
 {
   "name": "pubsub-proxy",
   "version": "0.1.0",
-  "description": "A really simple proxy for objects that support the pubsub pattern",
+  "description": "A really simple proxy for pubsub methods on objects, allowing you to setup/destroy groups of subscription handlers.",
   "private": true,
   "main": "index.js",
   "scripts": {
