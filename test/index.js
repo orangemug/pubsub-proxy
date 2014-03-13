@@ -56,9 +56,9 @@ describe('pubsubProxy', function() {
   });
 
   describe("Event", function() {
-    var el, proxy;
+    var event, proxy;
     beforeEach(function() {
-      event = new EventEmitter;
+      event = new EventEmitter();
       proxy = pubsubProxy(event);
     });
 
