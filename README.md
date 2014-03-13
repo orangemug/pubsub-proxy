@@ -1,5 +1,5 @@
 # pubsub-proxy
-A really simple proxy for objects that support the pubsub pattern, allowing to to destroy groups of subscription handlers
+A really simple proxy for pubsub methods on objects, allowing you to setup/destroy groups of subscription handlers.
 
 [![browser support](https://ci.testling.com/orangemug/pubsub-proxy.png)](https://ci.testling.com/orangemug/pubsub-proxy)
 
