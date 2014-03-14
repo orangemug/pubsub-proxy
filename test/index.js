@@ -6,54 +6,58 @@ var sinon = require("sinon");
 var assert = require("assert");
 
 describe('pubsubProxy', function() {
-  describe("Element", function() {
-    var el, proxy;
-    beforeEach(function() {
-      el = document.createElement("div");
-      document.body.appendChild(el);
-      proxy = pubsubProxy(el, "addEventListener", "removeEventListener", "dispatchEvent");
-    });
 
-    afterEach(function() {
-      document.body.removeChild(el);
-    });
+  // We need CustomEvent to test element events, IE8 does polyfill with `customevent-polyfill`
+  if(window.CustomEvent) {
+    describe("Element", function() {
+      var el, proxy;
+      beforeEach(function() {
+        el = document.createElement("div");
+        document.body.appendChild(el);
+        proxy = pubsubProxy(el, "addEventListener", "removeEventListener", "dispatchEvent");
+      });
 
-    it('#object is same as original', function() {
-      assert.equal(el, proxy.object());
-    });
+      afterEach(function() {
+        document.body.removeChild(el);
+      });
 
-    it("sub should function as before", function() {
-      var event, spy = sinon.spy();
-      proxy.addEventListener("click", spy);
-      event = new window.CustomEvent("click");
-      el.dispatchEvent(event);
-      assert(spy.calledOnce);
-    });
+      it('#object is same as original', function() {
+        assert.equal(el, proxy.object());
+      });
 
-    it("unsub should function as before", function() {
-      var event, spy = sinon.spy();
-      proxy.addEventListener("click", spy);
-      proxy.removeEventListener("click", spy);
-      event = new window.CustomEvent("click");
-      el.dispatchEvent(event);
-      assert(spy.notCalled);
-    });
+      it("sub should function as before", function() {
+        var event, spy = sinon.spy();
+        proxy.addEventListener("click", spy);
+        event = new window.CustomEvent("click");
+        el.dispatchEvent(event);
+        assert(spy.calledOnce);
+      });
 
-    it("#destroy should destroy only proxy bindings", function() {
-      var event
-      var spy1 = sinon.spy();
-      var spy2 = sinon.spy();
-      var spy3 = sinon.spy();
+      it("unsub should function as before", function() {
+        var event, spy = sinon.spy();
+        proxy.addEventListener("click", spy);
+        proxy.removeEventListener("click", spy);
+        event = new window.CustomEvent("click");
+        el.dispatchEvent(event);
+        assert(spy.notCalled);
+      });
 
-      proxy.addEventListener("click", spy1);
-      el.addEventListener("click", spy2);
-      proxy.addEventListener("click", spy3);
-      proxy.destroy();
-      event = new window.CustomEvent("click");
-      el.dispatchEvent(event);
-      assert(spy2.calledOnce);
+      it("#destroy should destroy only proxy bindings", function() {
+        var event
+        var spy1 = sinon.spy();
+        var spy2 = sinon.spy();
+        var spy3 = sinon.spy();
+
+        proxy.addEventListener("click", spy1);
+        el.addEventListener("click", spy2);
+        proxy.addEventListener("click", spy3);
+        proxy.destroy();
+        event = new window.CustomEvent("click");
+        el.dispatchEvent(event);
+        assert(spy2.calledOnce);
+      });
     });
-  });
+  }
 
   describe("Event", function() {
     var event, proxy;
